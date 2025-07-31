@@ -68,14 +68,15 @@
 <script>
   // Supported browsers (simple user agent checks)
   const isSupportedBrowser = () => {
-    const ua = navigator.userAgent;
-    return (
-      /Chrome/.test(ua) && !/Edg/.test(ua) && !/OPR/.test(ua) || // Chrome but not Edge or Opera
-      /Edg/.test(ua) ||    // Edge
-      /Safari/.test(ua) && !/Chrome/.test(ua) || // Safari but not Chrome
-      /Firefox/.test(ua)
-    );
-  };
+  const ua = navigator.userAgent;
+  return (
+    ua.includes("Chrome") && !ua.includes("Edg") && !ua.includes("OPR") ||
+    ua.includes("Edg") ||
+    ua.includes("Firefox") ||
+    ua.includes("Safari") && !ua.includes("CriOS") && !ua.includes("FxiOS")
+  );
+};
+
 
   const warning = document.getElementById("warning");
   const gamesDiv = document.getElementById("games");
