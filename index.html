@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Game Dashboard</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #121212;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    min-height: 100vh;
+    margin: 0;
+  }
+  h1 {
+    margin-bottom: 1em;
+  }
+  #warning {
+    background: #b33939;
+    color: white;
+    padding: 1em 2em;
+    border-radius: 8px;
+    max-width: 400px;
+    text-align: center;
+    display: none;
+  }
+  #games {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    max-width: 600px;
+    width: 100%;
+  }
+  .game-btn {
+    background: #0097e6;
+    border: none;
+    padding: 1.2em 2em;
+    font-size: 1.2em;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    flex: 1 1 180px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  .game-btn:hover {
+    background: #0984e3;
+  }
+</style>
+</head>
+<body>
+
+<h1>Game Dashboard</h1>
+
+<div id="warning">
+  Sorry, your browser is not supported. <br/>
+  Please use Chrome, Safari, Edge, or Firefox.
+</div>
+
+<div id="games"></div>
+
+<script>
+  // Supported browsers (simple user agent checks)
+  const isSupportedBrowser = () => {
+    const ua = navigator.userAgent;
+    return (
+      /Chrome/.test(ua) && !/Edg/.test(ua) && !/OPR/.test(ua) || // Chrome but not Edge or Opera
+      /Edg/.test(ua) ||    // Edge
+      /Safari/.test(ua) && !/Chrome/.test(ua) || // Safari but not Chrome
+      /Firefox/.test(ua)
+    );
+  };
+
+  const warning = document.getElementById("warning");
+  const gamesDiv = document.getElementById("games");
+
+  if (!isSupportedBrowser()) {
+    warning.style.display = "block";
+  } else {
+    // Define your games here
+    const games = [
+      { name: "Blackjack", url: "https://waiwindy.github.io/blackjack" },
+      { name: "Emoji Catcher (Plen)", url: "https://waiwindy.github.io/plen" },
+      { name: "Chat", url: "https://waiwindy.github.io/Chat" }
+     { name: "Button", url: "https://waiwindy.github.io/button" }
+
+    ];
+
+    games.forEach(game => {
+      const a = document.createElement("a");
+      a.href = game.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.textContent = game.name;
+      a.className = "game-btn";
+      gamesDiv.appendChild(a);
+    });
+  }
+</script>
+
+</body>
+</html>
